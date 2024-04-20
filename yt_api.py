@@ -6,7 +6,6 @@ from typing import List
 from datetime import datetime
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
-import googleapiclient.errors
 
 from consts import *
 from util import get_thumb_list, datetime_to_timestamp
@@ -154,7 +153,7 @@ def dump_playlist(youtube_api, playlist: object, thumbs_dir_path: str, no_thumbs
 
 def build_yt_api_object():
 	flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-	credentials = flow.run_console()
+	credentials = flow.run_local_server()
 	return googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
 
 
